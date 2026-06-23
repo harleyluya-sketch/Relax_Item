@@ -1,0 +1,22 @@
+name: Lint and Basic CI
+
+on:
+  push:
+    branches: [ main, master, "setup/project-structure" ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  super-linter:
+    name: Super-Linter
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Super-Linter
+        uses: github/super-linter@v4
+        env:
+          VALIDATE_ALL_CODEBASE: true
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
